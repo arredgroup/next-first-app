@@ -4,6 +4,7 @@ import Count from './components/Count';
 import Chatbot from "./components/Chatbot";
 import CardInfo from './components/CardInfo';
 import PanicButton from './components/PanicButton';
+import Memo from './components/Memo';
 import { ThemeContext } from "./contexts";
 
 export default function Home() {
@@ -22,6 +23,8 @@ export default function Home() {
           <CardInfo/>
           <br />
           <PanicButton alertCallback={alertCallback}/>
+          <br />
+          <Memo data={[1,2,3,4]} />
       </ThemeContext.Provider>
   );
 }
