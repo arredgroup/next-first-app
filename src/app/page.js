@@ -1,17 +1,27 @@
 "use client"
-import React, { createContext } from 'react';
+import React, { useCallback } from 'react';
 import Count from './components/Count';
 import Chatbot from "./components/Chatbot";
-import Card from './components/Card';
+import CardInfo from './components/CardInfo';
+import PanicButton from './components/PanicButton';
 import { ThemeContext } from "./contexts";
 
 export default function Home() {
 
+    const alertCallback = useCallback((message) => {
+        console.warn(message);
+        alert(message);
+    }, []);
+
   return (
       <ThemeContext.Provider value={{user: "Juan", clicks: 100}}>
           <Count/>
+          <br />
           <Chatbot/>
-          <Card/>
+          <br />
+          <CardInfo/>
+          <br />
+          <PanicButton alertCallback={alertCallback}/>
       </ThemeContext.Provider>
   );
 }

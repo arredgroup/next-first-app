@@ -1,8 +1,9 @@
 "use client"
 import React, { useState, useEffect, useContext } from 'react';
 import { ThemeContext } from '../contexts';
-// const React = require('react');
-
+import { Container } from "@mui/material";
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 const Count = () => {
 
     const user = useContext(ThemeContext);
@@ -19,14 +20,19 @@ const Count = () => {
     }, [count]);
 
     return (
-        <div>
-            <h1>Counter</h1>
-            <p>{count}</p>
-            <button onClick={() => setCount(count+1)}>
-            Click me
-            </button>
-            <input type={"number"} value={count} onChange={(e) => setCount(parseInt(e.target.value))} />
-        </div>
+        <Container>
+            <Card sx={{ minWidth: 275, width: 500 }}>
+                <CardContent>
+                    <h1>Counter</h1>
+                    <p>{count}</p>
+                    <button onClick={() => setCount(count + 1)}>
+                        Click me
+                    </button>
+                    <input type={"number"} value={count} onChange={(e) => setCount(parseInt(e.target.value))}/>
+                </CardContent>
+            </Card>
+
+        </Container>
     );
 };
 
