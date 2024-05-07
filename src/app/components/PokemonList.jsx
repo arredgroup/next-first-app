@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import {Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
+import {Button, Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import Paper from '@mui/material/Paper';
 import Pagination from '@mui/material/Pagination';
 import {getPokemonList} from '../services/PokeService';
+import PokemonModal from "./PokemonModal";
 
 const PokemonList = () => {
 
@@ -10,6 +11,9 @@ const PokemonList = () => {
     const [totals, setTotals] = useState(0);
     const [limit, setLimit] = useState(10);
     const [page, setPage] = useState(1);
+
+    const [openModal, setOpenModal] = useState(false);
+    const [selectedId, setSelectedId] = useState(0);
 
     const pages = Math.ceil(totals / limit);
 
@@ -25,6 +29,18 @@ const PokemonList = () => {
 
     const handlePagination = (event, value) => {
         setPage(value);
+    }
+
+    const getIdFromUrl = (url) => {
+        let id = url.replace('https://pokeapi.co/api/v2/pokemon/', '');
+        id = id.replace('/', '');
+        return +id;
+    }
+
+    const loadModal = (url) => {
+        const id = getIdFromUrl(url);
+        setSelectedId(id);
+        setOpenModal(true);
     }
 
     return (
@@ -48,7 +64,9 @@ const PokemonList = () => {
                                 <TableCell component="th" scope="row">
                                     {row.name}
                                 </TableCell>
-                                <TableCell align="right">{row.url}</TableCell>
+                                <TableCell align="right">
+                                    <Button variant="contained" onClick={() => loadModal(row.url)}>See Details</Button>
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
@@ -56,6 +74,10 @@ const PokemonList = () => {
             </TableContainer>
             <Pagination count={pages} page={page} onChange={handlePagination} />
             <br />
+            <PokemonModal
+                open={openModal}
+                handleClose={() => setOpenModal(false)}
+                id={selectedId} />
         </Container>
     )
 }
