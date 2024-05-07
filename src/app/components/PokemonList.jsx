@@ -15,10 +15,6 @@ const PokemonList = () => {
 
     useEffect(() => {
         loadPokemons();
-    }, []);
-
-    useEffect(() => {
-        loadPokemons();
     }, [page]);
 
     const loadPokemons = async () => {
