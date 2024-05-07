@@ -38,7 +38,9 @@ const PokemonModal = (props) => {
             aria-describedby="modal-modal-description"
         >
             <Box sx={style}>
-            {JSON.stringify(pokemonDetail)}
+            <p>Name: {pokemonDetail.name}</p>
+            <p>Types: {pokemonDetail.types.map((t) => t.type.name).join(',')}</p>
+            <p>Abilities: {pokemonDetail.abilities.map((a) => a.ability.name).join(',')}</p>
             </Box>
         </Modal>
     )
