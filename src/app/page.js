@@ -1,10 +1,7 @@
 "use client"
 import React, { useCallback } from 'react';
-import Count from './components/Count';
-import Chatbot from "./components/Chatbot";
-import CardInfo from './components/CardInfo';
-import PanicButton from './components/PanicButton';
-import Memo from './components/Memo';
+import PokemonList from "./components/PokemonList";
+
 import { ThemeContext } from "./contexts";
 
 export default function Home() {
@@ -15,16 +12,8 @@ export default function Home() {
     }, []);
 
   return (
-      <ThemeContext.Provider value={{user: "Juan", clicks: 100}}>
-          <Count/>
-          <br />
-          <Chatbot/>
-          <br />
-          <CardInfo/>
-          <br />
-          <PanicButton alertCallback={alertCallback}/>
-          <br />
-          <Memo data={[1,2,3,4]} />
+      <ThemeContext.Provider>
+          <PokemonList />
       </ThemeContext.Provider>
   );
 }
